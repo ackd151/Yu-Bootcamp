@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: #afafaf;
+}
+
+a:hover {
+  color: #fff;
+}
+
+body {
+  background-color: rgb(60, 65, 64);
+  color: #afafaf;
+  font-size: 1.5rem;
+}
+
+input {
+  font-size: inherit;
+}
+
+input:focus {
+  outline: none;
+  background-color: rgb(86, 92, 91);
+}
+
+.container {
+  width: 80%;
+  margin: 5vw auto;
+}
+
+.container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.delete-btn {
+  width: 25px;
+  height: 25px;
+  background-color: rgb(60, 65, 64);
+  color: #e26666;
+}
+
+.todo-form {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+
+.todo-form-controls {
+  flex: auto;
+  display: flex;
+  margin-left: 5px;
+}
+
+.todo-form input {
+  margin: 5px 0 5px 0;
+  padding: 5px;
+  background-color: rgb(60, 65, 64);
+  color: #afafaf;
+  border-radius: 5px 0 0 5px;
+  width: 100%;
+}
+
+.todo-form button {
+  background-color: rgb(60, 65, 64);
+  color: #afafaf;
+  width: 25px;
+  margin: 5px 0;
+  border-radius: 0 5px 5px 0;
+  color: #49bb7e;
+}
+
+.todo-list {
+  margin-top: 5px;
+}
+
+.lists {
+  margin-top: 10px;
+}
+
+.lists a,
+.lists a:visited {
+  color: #afafaf;
+}
+
+.lists a:hover {
+  color: #fff;
+}
+
+.list {
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.new-list {
+  position: absolute;
+  bottom: 50px;
+  width: 80%;
+}
+
+.new-list-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-list hr {
+  margin-bottom: 5px;
+}
+
+.new-list-form {
+  display: flex;
+  align-items: center;
+}
+
+.new-list-form input {
+  background-color: rgb(60, 65, 64);
+  color: #afafaf;
+  font-size: inherit;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.new-list-form button {
+  background-color: rgb(60, 65, 64);
+  color: #49bb7e;
+  padding: 7.5px 25px;
+  margin-left: 5px;
+  border-radius: 5px;
+}

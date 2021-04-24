@@ -1,0 +1,29 @@
+<% layout('/layouts/boilerplate') %>
+<h1>BMI Calculator</h1>
+<form action="/bmi-calculator" method="POST">
+  <div>
+    <label for="height">Height:</label>
+    <input type="text" id="height" name="height" />
+    <input
+      type="radio"
+      name="metersInches"
+      value="meters"
+      id="meters"
+      checked
+    />
+    <label for="meters">m</label>
+    <input type="radio" name="metersInches" value="inches" id="inches" />
+    <label for="inches">in</label>
+  </div>
+
+  <div>
+    <label for="weight">Weight:</label>
+    <input type="text" id="weight" name="weight" />
+    <input type="radio" name="kgsLbs" value="kgs" id="kgs" checked />
+    <label for="kgs">kg</label>
+    <input type="radio" name="kgsLbs" value="lbs" id="lbs" />
+    <label for="lbs">lb</label>
+  </div>
+
+  <button>Calculate</button>
+</form>

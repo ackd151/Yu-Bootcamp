@@ -1,0 +1,10 @@
+<% layout("/layouts/boilerplate") %>
+<form action="/articles" method="POST">
+  <label for="title">Title</label><br />
+  <input type="text" name="article[title]" id="title" />
+  <br />
+  <label for="content">Content</label><br />
+  <textarea name="article[content]" id="content" cols="30" rows="10"></textarea>
+  <br />
+  <button>Create Article</button>
+</form>

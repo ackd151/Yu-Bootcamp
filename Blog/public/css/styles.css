@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+li,
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Oswald", sans-serif;
+  line-height: 2;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+button {
+  background-color: rgb(31, 154, 255);
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+}
+
+button:hover {
+  background-color: rgb(120, 195, 255);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus {
+  outline: none;
+}
+
+footer {
+  font-size: 0.8rem;
+  text-align: center;
+  background-color: #dff2ff;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding: 15px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgb(245, 245, 245);
+  color: #8f8f8f;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding: 25px 0;
+  margin: 0 auto;
+}
+
+.navbar a:not(:last-child) {
+  padding: 0 10px;
+}
+
+.navbar a,
+.navbar a:visited {
+  color: #8f8f8f;
+}
+
+.navbar a:hover,
+.navbar a:active {
+  color: #9dc5e0;
+}
+
+/* Pages */
+.page {
+  width: 80%;
+  margin: 25px auto;
+}
+
+.posts {
+  margin: 25px 0 100px 25px;
+}
+
+.posts h2 {
+  border-bottom: 1px solid #afafaf;
+}
+
+.post {
+  padding: 10px 0;
+}
+
+.posts a,
+.posts a:visited {
+  font-size: 0.9rem;
+  margin-left: 10px;
+  color: #9dc5e0;
+}
+
+.posts a:hover {
+  font-size: 1rem;
+  margin-left: 12px;
+  color: rgb(120, 195, 255);
+}
+
+.hide {
+  display: none;
+}
+
+.read-more:hover > .hide {
+  display: inline;
+}
+
+/* Post page */
+.back {
+  margin-top: 25px;
+}
+
+/* Blog form */
+.blog-form input {
+  width: 100%;
+  padding: 10px;
+}
+
+.blof-form input:focus {
+  outline-color: rgb(120, 195, 255);
+}
+
+.blog-form textarea {
+  width: 100%;
+  height: 25vh;
+  padding: 10px;
+  color: #474747;
+  font-size: 1.5rem;
+}
+
+.blog-form textarea:focus {
+  outline-color: rgb(120, 195, 255);
+}
+
+.blog-form button {
+  padding: 5px 20px;
+}
+
+.blog-form label {
+  display: block;
+}

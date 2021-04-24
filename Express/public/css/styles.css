@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(240, 218, 174);
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: #000;
+}
+
+a:hover {
+  color: #fff;
+}
+
+.weather-img {
+  display: flex;
+  background-color: #fff;
+  width: 100px;
+  height: 100px;
+}

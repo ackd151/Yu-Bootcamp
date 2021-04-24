@@ -1,0 +1,9 @@
+<% layout("/layouts/boilerplate") %>
+<h1>HOME</h1>
+<% if (articles) { for (let article of articles) { %>
+<article class="article">
+  <h2><%= article.title %></h2>
+  <p><%= article.content %></p>
+</article>
+<% }} %>
+<a href="/articles/new">New Article</a>

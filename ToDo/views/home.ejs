@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate") %>
+<div class="container">
+  <div class="container-header">
+    <h1>Home</h1>
+    <span class="date">
+      <!-- prettier-ignore -->
+      <% const date = new Date(); %> 
+    <% const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' } %> 
+    <%= date.toLocaleString('en-US', dateOptions) %>
+    </span>
+  </div>
+  <hr />
+  <div class="lists">
+    <h3>My To-Do Lists:</h3>
+    <!-- prettier-ignore -->
+    <% if (lists) { %> 
+        <% for (const list of lists) { %>
+    <div class="list">
+      <div class="list-page-link">
+        <a href="/<%= list.name %>"><%= list.name %></a>
+      </div>
+      <div class="list-delete">
+        <form action="/<%=list.name%>?_method=DELETE" method="POST">
+          <button class="delete-btn">&times;</button>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <% } %> <% } %>
+  </div>
+  <div class="new-list">
+    <hr />
+    <div class="new-list-content">
+      <h3>Create new list:</h3>
+      <form action="/" method="POST" class="new-list-form">
+        <label for="name">List name: </label>
+        <input type="text" id="name" name="name" placeholder="list title" />
+        <button>Create</button>
+      </form>
+    </div>
+  </div>
+</div>

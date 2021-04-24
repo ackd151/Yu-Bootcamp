@@ -1,0 +1,15 @@
+<% layout('/layouts/boilerplate') %>
+<h1>
+  Your weather report for <%= location.charAt(0).toUpperCase() +
+  location.slice(1) %>
+</h1>
+<div class="weather-img">
+  <img
+    src="http://openweathermap.org/img/wn/<%=result.weather[0].icon%>@2x.png"
+    alt=""
+  />
+</div>
+<p><strong>Current temperature:</strong> <%= result.main.temp %></p>
+<p><strong>Current conditions:</strong> <%= result.weather[0].description %></p>
+<p><strong>Current humidity:</strong> <%= result.main.humidity %></p>
+<p><strong>Current wind speed:</strong> <%= result.wind.speed %> mph</p>

@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate"); %>
+<div class="container">
+  <% include ./partials/navbar %>
+  <div class="container-header">
+    <h1><%=list.name%></h1>
+    <span class="date">
+      <!-- prettier-ignore -->
+      <% const date = new Date(); %> 
+          <% const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' } %> 
+          <%= date.toLocaleString('en-US', dateOptions) %>
+    </span>
+  </div>
+  <hr />
+  <div class="todo-list">
+    <h2>Todos:</h2>
+    <form action="/<%=list.name%>" method="Post" class="todo-form">
+      <div class="todo-form-label">
+        <label for="new-task">New todo item: </label>
+      </div>
+      <div class="todo-form-controls">
+        <input
+          type="text"
+          name="todo"
+          id="new-task"
+          placeholder="task"
+          autocomplete="off"
+          required
+          autofocus
+        />
+        <button>&#43;</button>
+      </div>
+    </form>
+    <div class="todos">
+      <% if (list.todos) { %> <% for (let todo of list.todos) { %>
+      <div class="todo">
+        <p><%=todo.task%></p>
+        <form
+          action="/<%=list.name%>/<%=todo._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button name="todo" value="<%=todo._id%>" class="delete-btn">
+            &times;
+          </button>
+        </form>
+      </div>
+      <hr />
+      <% } %> <% } %>
+    </div>
+  </div>
+</div>
