@@ -7,6 +7,9 @@ const engine = require("ejs-mate");
 const User = require("./models/user");
 const logger = require("morgan");
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 mongoose.connect("mongodb://localhost:27017/userDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -33,7 +36,10 @@ app.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   const foundUser = await User.findOne({ email: username });
   if (foundUser) {
-    if (foundUser.password === password) {
+    const match = await bcrypt.compare(password, foundUser.password);
+    // if (foundUser.password === password) {
+    if (match) {
+      console.log(`${username} logged in.`);
       res.render("secrets");
     } else {
       res.send("User not validated");
@@ -47,9 +53,17 @@ app.get("/register", (req, res, next) => {
 
 app.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
-  const newUser = new User({ email: username, password });
-  await newUser.save((err) => console.log(err));
-  res.render("secrets");
+  bcrypt.hash(password, saltRounds, async (err, hash) => {
+    console.log(hash);
+    const newUser = new User({ email: username, password: hash });
+    await newUser.save((err) => console.log(err));
+    console.log(`${username} registered.`);
+    res.render("secrets");
+  });
+});
+
+app.get("/logout", (req, res, next) => {
+  res.redirect("/");
 });
 
 app.listen(3000, console.log("Listening on port 3000."));
