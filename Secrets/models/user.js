@@ -1,15 +1,13 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
-// const encrypt = require("mongoose-encryption");
+const passportLocalMongoose = require("passport-local-mongoose");
+mongoose.set("useCreateIndex", true);
 
 const userSchema = new Schema({
   email: String,
   password: String,
 });
 
-// userSchema.plugin(encrypt, {
-//   secret: process.env.SECRET,
-//   encryptedFields: ["password"],
-// });
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = new model("User", userSchema);

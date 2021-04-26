@@ -6,9 +6,10 @@ const path = require("path");
 const engine = require("ejs-mate");
 const User = require("./models/user");
 const logger = require("morgan");
-
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const { deserializeUser } = require("passport");
 
 mongoose.connect("mongodb://localhost:27017/userDB", {
   useNewUrlParser: true,
@@ -24,6 +25,23 @@ app.engine("ejs", engine);
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("tiny"));
 
+// Config session/passport
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// Routes
 app.get("/", (req, res, next) => {
   res.render("home");
 });
@@ -34,17 +52,12 @@ app.get("/login", (req, res, next) => {
 
 app.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-  const foundUser = await User.findOne({ email: username });
-  if (foundUser) {
-    const match = await bcrypt.compare(password, foundUser.password);
-    // if (foundUser.password === password) {
-    if (match) {
-      console.log(`${username} logged in.`);
-      res.render("secrets");
-    } else {
-      res.send("User not validated");
-    }
-  }
+  const { user, error } = await User.authenticate()(username, password);
+  if (!user && error) return next(error);
+  req.login(user, function (err) {
+    if (err) return next(err);
+    res.redirect("/secrets");
+  });
 });
 
 app.get("/register", (req, res, next) => {
@@ -53,16 +66,28 @@ app.get("/register", (req, res, next) => {
 
 app.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
-  bcrypt.hash(password, saltRounds, async (err, hash) => {
-    console.log(hash);
-    const newUser = new User({ email: username, password: hash });
-    await newUser.save((err) => console.log(err));
-    console.log(`${username} registered.`);
-    res.render("secrets");
+  User.register({ username }, password, function (err, user) {
+    if (err) {
+      console.log(err);
+      res.redirect("/register");
+    } else {
+      passport.authenticate("local")(req, res, function () {
+        res.redirect("/secrets");
+      });
+    }
   });
 });
 
+app.get("/secrets", (req, res, next) => {
+  if (req.isAuthenticated) {
+    res.render("secrets");
+  } else {
+    res.redirect("/login");
+  }
+});
+
 app.get("/logout", (req, res, next) => {
+  req.logout();
   res.redirect("/");
 });
 
