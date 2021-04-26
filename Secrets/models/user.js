@@ -6,6 +6,7 @@ mongoose.set("useCreateIndex", true);
 const userSchema = new Schema({
   email: String,
   password: String,
+  secrets: [String],
 });
 
 userSchema.plugin(passportLocalMongoose);

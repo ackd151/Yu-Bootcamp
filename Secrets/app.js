@@ -78,12 +78,29 @@ app.post("/register", async (req, res, next) => {
   });
 });
 
-app.get("/secrets", (req, res, next) => {
+app.get("/secrets", async (req, res, next) => {
   if (req.isAuthenticated) {
-    res.render("secrets");
+    const user = await User.findById(req.user.id);
+    res.render("secrets", { secrets: user.secrets });
   } else {
     res.redirect("/login");
   }
+});
+
+app.get("/submit", (req, res, next) => {
+  if (req.isAuthenticated) {
+    res.render("submit");
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.post("/submit", async (req, res, next) => {
+  const { secret } = req.body;
+  const user = await User.findById(req.user.id);
+  if (user) user.secrets.push(secret);
+  await user.save();
+  res.redirect("/secrets");
 });
 
 app.get("/logout", (req, res, next) => {
